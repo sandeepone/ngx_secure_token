@@ -1,8 +1,6 @@
 /*
- * Copyright (c) 2012, NetDNA LLC. <contact@netdna.com>
  * Copyright (c) 2012, FRiCKLE <info@frickle.com>
  * Copyright (c) 2012, Piotr Sikora <piotr.sikora@frickle.com>
- *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -211,13 +209,13 @@ static ngx_http_secure_token_enum_t ngx_http_secure_token_values[] = {
       { ngx_null_string, ngx_null_string },
       { ngx_null_string, ngx_null_string } },
 
-    { ngx_string("example1"), 
-      { ngx_string("$arg_example1dlm"),  /* input value */
+    { ngx_string("garmin"),
+      { ngx_string("$arg_garmindlm"),  /* input value */
         ngx_null_string },             /* input separator */
       { ngx_string("${secure_token_input_expire_32bit}${unparsed_uri}${secure_token_key}"),
         ngx_string("${secure_token_key}${secure_token_md5}") } },
 
-    { ngx_string("example2"), 
+    { ngx_string("kodak"),
       { ngx_string("$cookie_SIPDownloadAuth"),  /* input value */
         ngx_string("~") },                      /* input separator */
       { ngx_string("${secure_token_input_expire}${secure_token_input_access}${secure_token_key}"),
