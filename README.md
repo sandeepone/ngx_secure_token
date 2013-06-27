@@ -1,6 +1,6 @@
 About
 =====
-`ngx_secure_token` is token-based authorization module.
+`ngx_secure_token` is token-based authorization module built for clients that need backward compatibility with older token systems. For clients with newer token systems should check out `HttpSecureLinkModule` on the nginx wiki: http://wiki.nginx.org/HttpSecureLinkModule
 
 
 Status
@@ -12,11 +12,11 @@ Configuration directives
 ========================
 secure_token
 ------------
-* **syntax**: `secure_token on|garmin|kodak|off`
+* **syntax**: `secure_token on|example1|example2|off`
 * **default**: `off`
 * **context**: `http`, `server`, `location`
 
-Enable secure token module. `garmin` and `kodak` are short-cuts for
+Enable secure token module. `example1` and `example2` are short-cuts for
 predefined `secure_token_md5` and `secure_token_input` values.
 
 
@@ -111,9 +111,10 @@ Lowercase version of the unparsed URI (without args).
 
 Sample configurations
 =====================
+
 Sample configuration #1
 -----------------------
-Configuration for Garmin (manual).
+Manual Configuration for Secure Token md5 (example1).
 
     http {
         server {
@@ -122,9 +123,9 @@ Configuration for Garmin (manual).
                 secure_token_key    <key>;
                 secure_token_md5    "${secure_token_input_expire_binary}${unparsed_uri}${secure_token_key}"
                                     "${secure_token_key}${secure_token_md5}";
-                secure_token_input  "$arg_garmindlm";
+                secure_token_input  "$arg_example1dlm";
 
-                set $backend        origin.garmin.com;
+                set $backend        origin.example.com;
                 proxy_pass          http://$backend$lowercase_uri;
             }
         }
@@ -133,15 +134,15 @@ Configuration for Garmin (manual).
 
 Sample configuration #2
 -----------------------
-Configuration for Garmin (predefined).
+Predefined Configuration for example1.
 
     http {
         server {
             location / {
-                secure_token        garmin;
+                secure_token        example1;
                 secure_token_key    <key>;
 
-                set $backend        origin.garmin.com;
+                set $backend        origin.example.com;
                 proxy_pass          http://$backend$lowercase_uri;
             }
         }
@@ -150,15 +151,15 @@ Configuration for Garmin (predefined).
 
 Sample configuration #3
 -----------------------
-Configuration for Kodak (predefined).
+Predefined Configuration for Secure Token Input (example2).
 
     http {
         server {
             location / {
-                secure_token        kodak;
+                secure_token        example2;
                 secure_token_key    <key>;
 
-                proxy_pass          http://origin.kodak.com;
+                proxy_pass          http://origin.example.com;
             }
         }
     }
@@ -166,8 +167,10 @@ Configuration for Kodak (predefined).
 
 License
 =======
+    Copyright (c) 2012, NetDNA LLC. <contact@netdna.com>
     Copyright (c) 2012, FRiCKLE <info@frickle.com>
     Copyright (c) 2012, Piotr Sikora <piotr.sikora@frickle.com>
+
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
